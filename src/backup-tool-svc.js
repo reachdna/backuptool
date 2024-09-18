@@ -185,7 +185,6 @@ class BackupToolService {
    */
   async #restoreFromChunk(file, filePath) {
     const fileChunks = await this.dao.getFileChunks(file.id);
-    console.log("fileChunks", fileChunks.length, file.id);
     const fileBuffer = Buffer.concat(await Promise.all(fileChunks.map(async (chunk) => {
       return await this.dao.getChunkByHash(chunk.chunk_hash);
     })));
