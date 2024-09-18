@@ -7,9 +7,12 @@ For detailed requirements and solutions, refer to the **[BUILD_PLAN.md](./BUILD_
 
 ### Prerequisites
 
-- PostgreSQL database
 - Node.js installed
 - npm installed
+- PostgreSQL database - optional, if not already on local machine, run `make init` and skip the whole **Setup** since `make init` will
+  - Setup a docker container with postgres in it. 
+  - Create the proper role and initialize the database 
+  - Generate test files
 
 ### Setup
 
@@ -52,7 +55,7 @@ chmod +x file_gen.sh
 
 ### Taking a Snapshot
 
-Run `backup.sh`. 
+Run `backup.sh` or `make backup`
 It is a wrapper around the command in `index.js`:
 `bash
 node src/index.js snapshot --targetDirectory $directory
@@ -62,22 +65,24 @@ The default directory is `snapshot-files`, but it can be passed as an argument t
 
 ### Get a List of Snapshots
 
-Run `list.sh`.
+Run `list.sh`  or `make list`
 
 ### Restore a Snapshot
 
-Run `restore.sh <snapshotId>`. 
+Run `restore.sh <snapshotId>` or `make restore <snapshotId>`
 The default directory is `output`, but it can be passed as an argument to `restore.sh`.
 
 ### Prune a Snapshot
 
-Run `prune.sh <snapshotId>`.
+Run `prune.sh <snapshotId>`  or `make prune <snapshotId>`
+
+### Check for corrupted content
+
+Run `check.sh` or `make check`
 
 ### Run Tests
+Run `npm test` or `make test`
 
-```bash
-npm test
-```
 
 ### Switch Between Chunking and Non-Chunking Techniques
 

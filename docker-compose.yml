@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: backup_tool
+      POSTGRES_USER: backup_tool
+      POSTGRES_PASSWORD: backup_tool_local
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

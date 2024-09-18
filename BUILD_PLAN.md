@@ -140,4 +140,5 @@ Hashing is the key here!!
 
 ## Not (Yet) Implementing
 1. Remove hashed content/chunk when all related snapshot files were pruned. 
-2. AWS S3 implementation 
+2. AWS S3 implementation.
+3. Potentially review acutal performance and usage to further fine tune hashing technique dynamically.
