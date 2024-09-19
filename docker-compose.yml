@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:13
@@ -9,6 +11,20 @@ services:
       POSTGRES_PASSWORD: backup_tool_local
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgres://backup_tool:backup_tool_local@db:5432/backup_tool
+    depends_on:
+      - db
 
 volumes:
   pgdata:
