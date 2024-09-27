@@ -13,16 +13,28 @@ yargs.command({
       type: 'string',
     },
   },
-  handler(argv) {
-    backupToolService.takeSnapshot(argv.targetDirectory);
+  handler: async (argv) => {
+    try {
+      await backupToolService.takeSnapshot(argv.targetDirectory);
+    } catch (error) {
+      console.error('An error occurred:', error);
+    } finally {
+      process.exit(0);
+    }
   },
 });
 
 yargs.command({
   command: 'list',
   describe: 'List all snapshots',
-  handler() {
-    backupToolService.listSnapshots();
+  handler: async () => {
+    try {
+      await backupToolService.listSnapshots();
+    } catch (error) {
+      console.error('An error occurred:', error);
+    } finally {
+      process.exit(0);
+    }
   },
 });
 
@@ -41,8 +53,14 @@ yargs.command({
       type: 'string',
     },
   },
-  handler(argv) {
-    backupToolService.restoreSnapshot(argv.snapshot, argv.outputDirectory);
+  handler: async (argv) => {
+    try {
+      await backupToolService.restoreSnapshot(argv.snapshot, argv.outputDirectory);
+    } catch (error) {
+      console.error('An error occurred:', error);
+    } finally {
+      process.exit(0);
+    }
   },
 });
 
@@ -56,16 +74,28 @@ yargs.command({
       type: 'number',
     },
   },
-  handler(argv) {
-    backupToolService.pruneSnapshots(argv.snapshot);
+  handler: async (argv) => {
+    try {
+      await backupToolService.pruneSnapshots(argv.snapshot);
+    } catch (error) {
+      console.error('An error occurred:', error);
+    } finally {
+      process.exit(0);
+    }
   },
 });
 
 yargs.command({
   command: 'check',
   describe: 'Check the database for corrupted file content',
-  handler() {
-    backupToolService.checkDatabase();
+  handler: async () => {
+    try {
+      await backupToolService.checkDatabase();
+    } catch (error) {
+      console.error('An error occurred:', error);
+    } finally {
+      process.exit(0);
+    }
   },
 });
 
